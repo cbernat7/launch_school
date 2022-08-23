@@ -10,7 +10,7 @@ Guide for written exam:
 - popular collection methods*
   - Each, map, select
 - Variables as pointers**
-- Puts vs return+
+- Puts vs return+gu
 - False vs nil, the idea of truthiness+
 - Method definition and method invocation+
 - implicit return value of method invocations and blocks+
