@@ -1,0 +1,197 @@
+P- understand the PROBLEM
+E - EXAMPLES / test cases
+D - DATA structures
+A - Algorithm
+C - Code
+
+P: example 
+# PROBLEM:
+
+# Given a string, write a method change_me which returns the same
+# string but with all the words in it that are palindromes uppercased.
+
+# change_me("We will meet at noon") == "We will meet at NOON"
+# change_me("No palindromes here") == "No palindromes here"
+# change_me("") == ""
+# change_me("I LOVE my mom and dad equally") == "I LOVE my MOM and DAD equally"
+
+can clarify:
+-should words remain in the same if they start uppercase? see test cases
+-how to deal w empty string provided as input? - see test
+-can assume all inputs are strings??
+-should consider letter case when deciding if word is palendrome or not? (mom vs Mom)
+-return same string or new string?
+
+write down inputs and outputs for the problem are, and describe the rules
+identify the explicit and implicit requirements:
+
+######################
+input: string
+output: string(not the same object)
+rules:
+  explicit requirements:
+    -every palindrome in the string must be converted to uppercase
+    -palindromes are case sensitive("Dad" is not, "dad" is)
+  implicit:
+    -returned string shouldn't be the same string object
+    -if the string is an empty string, result should be an empty string
+#######################
+
+Data structures/Algorithms
+
+data structures influence your algorithm 
+# PROBLEM:
+
+# Given a string, write a method `palindrome_substrings` which returns
+# all the substrings from a given string which are palindromes. Consider
+# palindrome words case sensitive.
+
+# Test cases:
+# palindrome_substrings("supercalifragilisticexpialidocious") == ["ili"]
+# palindrome_substrings("abcddcbA") == ["bcddcb", "cddc", "dd"]
+# palindrome_substrings("palindrome") == []
+# palindrome_substrings("") == []
+
+questions:
+  -will inputs always be strings?
+input: string 
+output: array of substrings
+rules:
+  explicit: 
+    -every substring in the string that is a palidrome is returned as part of an array
+  implicit:
+    -palendrome is case sensitive
+    -if the provided string has no substring palendromes, result is  empty array
+    -if empty string, result should be empty array.
+
+Data structure for this problem? - probably an array since that's the output.
+Algorithm:
+high level first:
+  # Algorithm:
+#  - initialize a result variable to an empty array
+#  - create an array named substring_arr that contains all of the
+#    substrings of the input string that are at least 2 characters long.
+#  - loop through the words in the substring_arr array.
+#  - if the word is a palindrome, append it to the result
+#    array
+#  - return the result array
+
+then write code for it:
+def palindrome_substrings(str)
+  result = []
+  substrings_arr = substring(str)
+  substrings_arr.each do |substring|
+    result << substring if is_palindrome?(substring)
+  end
+  result
+end
+
+^need to define methods substrings and is_palindrome?
+for substrings:
+for each starting index from 0 through the next to last index position
+  for each substring length from 2 until there are no substrings of that length
+    extract the substring of the indicated length starting at the indicated index position
+  end of inner loop
+end of outer loop
+
+more detailed algorithm:
+
+-create and empty array called 'result' that will contain all required substrings
+-create a 'starting_index' variable (value 0) for the starting index of a substring
+-start a loop that iterates over starting_index from 0 to the length of the string minus 2
+  -create a num_chars variable (value 2) for the length of a substring
+  -start an inner loop that iterates over num_chars from 2 to string.length - starting_index
+    -extract a substring of length num_chars from 'string' starting at 'starting_index'
+    -append the extracted substring to the 'result' array
+    -increment the 'num_chars' variable by 1
+  -end the inner loop
+  -increment the 'starting_index' variable by 1
+-end the outer loop
+-return the 'result' array
+
+formal pseudocode:
+START 
+
+/*given a string named 'string'*/
+
+SET result = []
+SET starting_index = 0
+
+WHILE starting_index <= length of string - 2
+  SET num_chars = 2
+  WHILE num_chars <= length of string - starting_index
+    SET substring = num_chars characters from string starting at index starting_index
+    append substring to result array
+    SET num_chars = num_chars + 1
+  SET starting_index = starting_index + 1
+
+  RETURN result
+END 
+
+actual code:
+
+def substrings(str)
+  result = []
+  starting_index = 0;
+
+  while (starting_index <= str.length - 2)
+    num_chars = 2
+    while (num_chars <= str.length - starting_index)
+      substring = str.slice(starting_index, num_chars)
+      result << substring
+      num_chars += 1
+    end
+    starting_index += 1
+  end
+  result
+end
+------------------------------------------------------------
+
+check to see if string is palenrome:
+pseudocode:
+inside the is_palindrome? method, check wether string value is equal to its reversed value
+
+code:
+def is_palindrome?(str)
+  return str == str.reverse
+end
+
+-----------------------------------------------------
+all the code for the problem:
+
+def substrings(str)
+  result = []
+  starting_index = 0;
+
+  while (starting_index <= str.length - 2)
+    num_chars = 2
+    while (num_chars <= str.length - starting_index)
+      substring = str.slice(starting_index, num_chars)
+      result << substring
+      num_chars += 1
+    end
+    starting_index += 1
+  end
+  result
+end
+
+def is_palindrome?(str)
+  str == str.reverse
+end
+
+def palindrome_substrings(str)
+  result = []
+  substring_arr = substring(str)
+  substring_arr.each do |substring|
+    result << substring if is_palindrome?(substring)
+  end
+  result
+end
+
+
+
+
+
+
+
+

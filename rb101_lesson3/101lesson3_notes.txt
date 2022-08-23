@@ -1,0 +1,66 @@
+puts on an array - prints out each item in array on own line
+p array - prints out as an array (bc inspecting)
+
+! or ? at the end of a mthod, it's part of the method name. function depends on method implementation
+
+!= not equals
+? : ternary operator for if...else
+!!<some object> turns any object into their boolean equivalent
+!<some object> turn any object into the opposite of their boolean equivalent
+
+
+advice.gsub!("important", "urgent")
+
+
+numbers = [1, 2, 3, 4, 5]
+--------
+numbers.delete_at(1) #=> deletes element at the specified index, 
+                    # returns that element or nil if out of range
+=> 2
+numbers 
+=> [1, 3, 4, 5]
+
+----
+
+numbers.delete(1) #=> delete all items from self that are equal to object
+                  # returns last deleted item or nil if no matching item is found
+=> 1 
+numbers
+=> [2, 3, 4, 5]
+---------------------
+
+
+#programmatically determine if 42 is between 10 and 100
+(10..100).cover?(42)
+=>true
+
+--------------------------
+#show two different ways to put the expected "Four score and " in front of it.
+
+famous_words = "seven years ago..."
+famous_words.insert(0, "Four score and ")
+famous_words.prepend("Four score and ")
+"Four score and " << famous_words
+"Four score and " + famous_words
+
+---------------------
+
+ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
+
+ages.has_key?("Spot")
+ages.include?("Spot")
+ages.member?("Spot")
+----------------
+munsters_description = "The Munsters are creepy in a good way."
+#convert the string in the following way:
+#swapcase   => "tHE mUNSTERS ARE CREEPY IN A GOOD WAY."
+#capitalize => "The munsters are creepy in a good way."
+#downcase   => "the munsters are creepy in a good way."
+#upcase     => "THE MUNSTERS ARE CREEPY IN A GOOD WAY."
+
+
+----------
+#write a one liner to count number of lower case T in the string:
+statement = "The Flintstones Rock!"
+statement.count "t"
+----------------------

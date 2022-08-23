@@ -1,0 +1,149 @@
+ruby collections
+string
+array
+hash
+
+ELEMENTS
+string
+integer-based index that represents each character in the string
+starts @ 0
+str = "abcde"
+str[2] => 'c'
+
+can reference multiple by using an index starting point and the number of characters to retunr
+str[2,3] => 'cde'
+
+^this is actually a call ot the #slice method
+str[2,3] is the same as saying:
+str.slice(2,3)
+
+chaining:
+str[2,3][0] => 'c'
+^calling [0] on the return value of str[2,3]
+the same as 'cde'[0]
+
+str = 'the grass is green'
+#to reference 'grass' from the string:
+str[4,5] => 'grass' OR
+str.slice(4,5) => 'grass'
+
+
+TECHNICALLY - strings are not true collections
+true collections containe multiple objects, strings are only 1 objects
+the individual characters are part of the object that contains the string
+they act like collections - can access and assign each character individually
+BUT when you access a single character of the string like str[2]
+->the return value is a NEW string.
+char1 = str[2] => 'c'
+char2 = str[2] => 'c'
+char1.object_id == char2.object_id => false
+
+EACH time you call str[2] it returns a NEW string 
+---------------------------------------------------
+Array element reference
+-zero-indexed collections.
+-lists of elements that are ordered by index. each element can be any object
+arr = ['a','b','c','d','e']
+arr[2] => 'c'
+arr[2,3] =>  ['c','d','e']
+arr[2,3][0] => 'c'
+
+
+arr[2,3] is alternative syntax for array#slice method
+returns a NEW ARRAY (where string#slice returns a new string)
+BUT array#slice returns the element at the specified index not an array,
+when only a single index is passed.
+arr.slice(3,1) => ['4']
+arr.slice(3..3) => ['4']
+arr.slice(3) => '4'
+-----------------------------------------------------
+hash
+integer-based index. key-value pairs(can be any type of object)
+
+hsh = { 'fruit' => 'apple', 'vegetable' => 'carrot'}
+hsh['fruit'] = >'apple'
+hsh['fruit'][0] => 'a'
+
+^the [0] is a string element reference. called on the return value of hsh['fruit'] which is 'apple'
+
+when initializing a hash: keys must be unique
+if duplicate keys entered, the first one is overwritten by the duplicate
+values can be duplicate
+
+#keys and #values methods: return an array
+capitals = { uk: 'London', france: 'Paris', germany: 'Berlin'}
+capitals.keys => [:uk, :france, :germany]
+capitals.values => ['London', 'Paris', 'Berlin']
+capitals.values[0] => 'London'
+
+the [0] references the item at index 0, so returns just the value not an array.
+
+---------------------------------------------------------------
+
+if you reference out of bounds index => returns nil
+for a string this is fine bc nil is invalid return value, but could be a valid value in an array
+arr = [3, 'd', nil]
+arr[2] => nil
+arr[5] => nil
+
+CONFUSING! can use #fetch. tries to return element at position index, but throws
+IndexError if referenced index it out of bounds:
+arr[5] => IndexError
+
+----------------------------------------------------------------
+Negative indices
+arr = [1,2,3]
+arr[-1] => 3
+arr[-2] => 2
+arr[-3] => 1
+arr[-4] => nil
+arr.fetch(-4) => IndexError
+
+Hash#fetch
+hsh = { :a => 1, 'b' => 'two', :c => nil }
+hsh[:c] => nil
+hsh['c']=> nil
+hsh.fetch('c') = > KeyError: key not found
+----------------------------------------------------------------
+Conversion
+string#chars
+returns an ARRAY of individual characters
+str = 'practice'
+arr = str.chars => ['p','r','a','c','t','i','c','e']
+
+array#join returns a string w elements of the array joined together
+arr.join => 'practice'
+
+str = 'How do you get to Carnegie Hall?'
+arr = str.split # => ["How", "do", "you", "get", "to", "Carnegie", "Hall?"]
+arr.join        # => "HowdoyougettoCarnegieHall?"
+arr.join(' ') => "How do you get to Carnegie Hall?"
+
+
+hash#to_a returns an array
+hsh = { sky: 'blue', grass: 'green}
+hsh.to_a => [[:sky, 'blue'], [:grass, "green"]]
+^arry it returns is 2 sub array, each sub array contians the key/value pair from the hash.
+
+array#to_h
+arr = [[:name, 'joe'], [:age, 10], [:favorite_color, 'blue']]
+arr.to_h => { :name => 'joe, :age => 10, :favorite_color => 'blue' }
+-------------------------------------------------------
+
+string element assignment
+can use element assignment notation of string to change the value of specific character within a string - refer to its index
+str = "joe loves blue"
+str[0] = 'J'
+str = > 'Joe loves blue"
+^this way of modifying a string is a destructive action.
+
+can do it similarly with arrays
+arr = [1,2,3,4,5]
+arr[0] += 1 #=>2
+arr #=> [2,2,3,4,5]
+DESTRUCTIVE   
+
+hash is similar too:
+hsh = { apple: 'Produce', carrot: 'Produce', pear: 'Produce', broccoli: 'Produce' }
+hsh[:apple] = 'Fruit'
+hsh #=>  {:apple => "Fruit", :carrot => "Produce", :pear => "Produce", :broccoli => "Produce" }
